@@ -1,7 +1,7 @@
 ---
 name: Feature implementation
 about: Create a pull request related to a feature.
-labels: type:feature, status:pending
+labels: "type:feature", "status:pending"
 ---
 
 **Describe the feature**
