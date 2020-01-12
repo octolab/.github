@@ -1,7 +1,7 @@
 ---
 name: Bug fix
 about: Create a pull request related to a bug.
-labels: "type:bug", "status:pending"
+labels: type:bug, status:pending
 ---
 
 **Describe the bug**
