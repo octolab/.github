@@ -2,8 +2,10 @@ package labels
 
 import (
 	"context"
+	"fmt"
+	"strconv"
 
-	_ "github.com/alexeyco/simpletable"
+	"github.com/alexeyco/simpletable"
 	"github.com/spf13/cobra"
 
 	"go.octolab.org/toolkit/github/internal"
@@ -17,24 +19,41 @@ func NewListCommand(provider Provider) *cobra.Command {
 			ctx, cancel := context.WithCancel(context.TODO())
 			defer cancel()
 
-			repositories, err := provider.RepositoryWithLabels(ctx, convert(args)...)
+			list := internal.RepositoryURNFromStrings(args)
+			repositories, err := provider.RepositoryWithLabels(ctx, list...)
 			if err != nil {
 				return err
 			}
 
 			for _, repository := range repositories {
-				cmd.Printf("%s:\n\n---\n\n", repository.FullName)
+				cmd.Println("## " + repository.URN.String())
+				table := simpletable.New()
+				table.Header = &simpletable.Header{
+					Cells: []*simpletable.Cell{
+						{Text: "ID"},
+						{Text: "Name"},
+						{Text: "Color"},
+						{Text: "Description"},
+					},
+				}
+				for _, label := range repository.Labels {
+					table.Body.Cells = append(table.Body.Cells, []*simpletable.Cell{
+						{Text: strconv.FormatInt(label.ID, 10)},
+						{Text: label.Name},
+						{Text: label.Color},
+						{Text: label.Desc},
+					})
+				}
+				table.Footer = &simpletable.Footer{
+					Cells: []*simpletable.Cell{
+						{Text: fmt.Sprintf("Total: %d", len(repository.Labels)), Span: 4},
+					},
+				}
+				table.SetStyle(simpletable.StyleDefault)
+				cmd.Println(table.String())
 			}
 			return nil
 		},
 	}
 	return cmd
-}
-
-func convert(list []string) []internal.FullName {
-	converted := make([]internal.FullName, 0, len(list))
-	for _, str := range list {
-		converted = append(converted, internal.FullName(str))
-	}
-	return converted
 }

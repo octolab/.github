@@ -7,5 +7,5 @@ import (
 )
 
 type Provider interface {
-	RepositoryWithLabels(context.Context, ...internal.FullName) ([]internal.Repository, error)
+	RepositoryWithLabels(context.Context, ...internal.RepositoryURN) ([]internal.Repository, error)
 }
