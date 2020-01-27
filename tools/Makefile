@@ -1,6 +1,6 @@
 # sourced by https://github.com/octomation/makefiles
 
-.DEFAULT_GOAL = test-with-coverage
+.DEFAULT_GOAL = install
 
 SHELL = /bin/bash -euo pipefail
 
@@ -62,76 +62,44 @@ update:
 		go get -mod= -u $$packages; \
 	fi
 
-BINARY  = $(BINPATH)/$(shell basename $(MAIN))
-BINPATH = $(PWD)/bin
-COMMIT  = $(shell git rev-parse --verify HEAD)
-DATE    = $(shell date +%Y-%m-%dT%T%Z)
-LDFLAGS = -ldflags "-s -w -X main.commit=$(COMMIT) -X main.date=$(DATE)"
-MAIN    = $(MODULE)
+BINPATH = $(shell dirname $(PWD))/bin
 
 export GOBIN := $(BINPATH)
 export PATH  := $(BINPATH):$(PATH)
 
-.PHONY: build-env
-build-env:
-	@echo "BINARY:      $(BINARY)"
+.PHONY: tools-env
+tools-env:
 	@echo "BINPATH:     $(BINPATH)"
-	@echo "COMMIT:      $(COMMIT)"
-	@echo "DATE:        $(DATE)"
 	@echo "GOBIN:       `go env GOBIN`"
-	@echo "LDFLAGS:     $(LDFLAGS)"
-	@echo "MAIN:        $(MAIN)"
 	@echo "PATH:        $$PATH"
 
 .PHONY: build
-build:
-	@go build -o $(BINARY) $(LDFLAGS) $(MAIN)
+build: install
 
 .PHONY: build-clean
 build-clean:
 	@go clean -cache
 
 .PHONY: install
-install: build
+install:
+	@go generate tools.go
 
 .PHONY: install-clean
 install-clean:
-	@rm -f $(BINARY)
-
-.PHONY: test
-test:
-	@go test -race -timeout $(TIMEOUT) $(PACKAGES)
-
-.PHONY: test-clean
-test-clean:
-	@go clean -testcache
-
-.PHONY: test-with-coverage
-test-with-coverage:
-	@go test -cover -timeout $(TIMEOUT) $(PACKAGES) | column -t | sort -r
-
-.PHONY: test-with-coverage-profile
-test-with-coverage-profile:
-	@go test -cover -covermode count -coverprofile c.out -timeout $(TIMEOUT) $(PACKAGES)
-
-.PHONY: dist
-dist:
-	@godownloader .goreleaser.yml > bin/install
-
-.PHONY: format
-format:
-	@goimports -local $(LOCAL) -ungroup -w $(PATHS)
-
-.PHONY: generate
-generate:
-	@go generate $(PACKAGES)
+	@if command -v egg > /dev/null; then \
+		tools="`egg tools list`"; \
+		for tool in $$tools; do rm -f $(BINPATH)/$$tool; done; \
+	else \
+		tools="$(shell cat tools.go | grep 'go:generate' | awk '{print $$NF}' | xargs basename)"; \
+		for tool in $$tools; do rm -f $(BINPATH)/$$tool; done; \
+	fi
 
 
 .PHONY: clean
-clean: build-clean deps-clean install-clean test-clean
+clean: build-clean deps-clean install-clean
 
 .PHONY: env
-env: go-env build-env
+env: go-env tools-env
 
 .PHONY: refresh
-refresh: update deps generate format test build
+refresh: update deps install
