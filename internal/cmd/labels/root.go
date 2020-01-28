@@ -8,6 +8,9 @@ func New(provider Provider) *cobra.Command {
 		Short: "Manage labels",
 		Long:  "Manage labels.",
 	}
-	cmd.AddCommand(NewListCommand(provider))
+	cmd.AddCommand(
+		NewCompareCommand(provider),
+		NewListCommand(provider),
+	)
 	return cmd
 }
