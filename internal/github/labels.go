@@ -8,6 +8,7 @@ import (
 	"golang.org/x/sync/errgroup"
 
 	"go.octolab.org/toolkit/github/internal"
+	"go.octolab.org/toolkit/github/internal/errors"
 )
 
 func (manager *manager) RepositoryWithLabels(
@@ -15,6 +16,7 @@ func (manager *manager) RepositoryWithLabels(
 	list ...internal.RepositoryURN,
 ) ([]internal.Repository, error) {
 	result := make([]internal.Repository, 0, len(list))
+
 	for _, urn := range list {
 		var (
 			mutex      sync.Mutex
@@ -67,6 +69,10 @@ func (manager *manager) RepositoryWithLabels(
 			return nil, err
 		}
 		result = append(result, repository)
+	}
+
+	if len(result) != len(list) {
+		return nil, errors.Inconsistent
 	}
 	return result, nil
 }
