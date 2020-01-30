@@ -6,6 +6,8 @@ import (
 	"regexp"
 	"strings"
 	"unsafe"
+
+	"go.octolab.org/toolkit/github/internal/entity"
 )
 
 var repositoryURN = regexp.MustCompile(`^[^/]+/[^/]+$`)
@@ -14,7 +16,7 @@ var repositoryURN = regexp.MustCompile(`^[^/]+/[^/]+$`)
 type Repository struct {
 	ID     int64
 	URN    RepositoryURN
-	Labels []Label
+	Labels []entity.Label
 }
 
 // RepositoryURN represents a full name of repository in the format "<owner>/<name>".
@@ -65,12 +67,4 @@ func RepositoryURNFromStrings(list []string) []RepositoryURN {
 	header := (*reflect.SliceHeader)(unsafe.Pointer(&list))
 	converted := (*[]RepositoryURN)(unsafe.Pointer(header))
 	return *converted
-}
-
-// Label represents a GitHub label.
-type Label struct {
-	ID    int64
-	Name  string
-	Color string
-	Desc  string
 }

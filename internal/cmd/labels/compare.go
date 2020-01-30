@@ -7,6 +7,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"go.octolab.org/toolkit/github/internal"
+	"go.octolab.org/toolkit/github/internal/entity"
 )
 
 func NewCompareCommand(provider Provider) *cobra.Command {
@@ -38,9 +39,9 @@ func NewCompareCommand(provider Provider) *cobra.Command {
 			delta := len(expected.Labels) - len(obtained.Labels)
 			switch {
 			case delta > 0:
-				obtained.Labels = append(obtained.Labels, make([]internal.Label, delta)...)
+				obtained.Labels = append(obtained.Labels, make([]entity.Label, delta)...)
 			case delta < 0:
-				expected.Labels = append(expected.Labels, make([]internal.Label, -delta)...)
+				expected.Labels = append(expected.Labels, make([]entity.Label, -delta)...)
 			}
 			for i := range make([]struct{}, len(expected.Labels)) {
 				left, right := expected.Labels[i], obtained.Labels[i]

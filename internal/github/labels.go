@@ -2,14 +2,37 @@ package github
 
 import (
 	"context"
+	"sort"
 	"sync"
 
 	"github.com/google/go-github/v29/github"
 	"golang.org/x/sync/errgroup"
 
 	"go.octolab.org/toolkit/github/internal"
+	"go.octolab.org/toolkit/github/internal/entity"
 	"go.octolab.org/toolkit/github/internal/errors"
 )
+
+func (manager *manager) CompareLabels(
+	ctx context.Context,
+	expected,
+	obtained internal.RepositoryURN,
+) ([]entity.LabelTransform, error) {
+	repositories, err := manager.RepositoryWithLabels(ctx, expected, obtained)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, repository := range repositories {
+		sort.Slice(repository.Labels, func(i, j int) bool {
+			return repository.Labels[i].Name < repository.Labels[j].Name
+		})
+	}
+
+	src, dst := repositories[0], repositories[1]
+	_, _ = src, dst
+	return nil, nil
+}
 
 func (manager *manager) RepositoryWithLabels(
 	ctx context.Context,
@@ -49,9 +72,9 @@ func (manager *manager) RepositoryWithLabels(
 				return nil
 			}
 
-			labels := make([]internal.Label, 0, len(data))
+			labels := make([]entity.Label, 0, len(data))
 			for _, label := range data {
-				labels = append(labels, internal.Label{
+				labels = append(labels, entity.Label{
 					ID:    label.GetID(),
 					Name:  label.GetName(),
 					Color: label.GetColor(),
@@ -75,4 +98,92 @@ func (manager *manager) RepositoryWithLabels(
 		return nil, errors.Inconsistent
 	}
 	return result, nil
+}
+
+var conversion = map[string]struct {
+	color string
+	desc  string
+	to    entity.Label
+}{
+	"bug": {
+		color: "d73a4a",
+		desc:  "Something isn't working",
+		to: entity.Label{
+			Name:  "",
+			Color: "",
+			Desc:  "",
+		},
+	},
+	"documentation": {
+		color: "0075ca",
+		desc:  "Improvements or additions to documentation",
+		to: entity.Label{
+			Name:  "",
+			Color: "",
+			Desc:  "",
+		},
+	},
+	"duplicate": {
+		color: "cfd3d7",
+		desc:  "This issue or pull request already exists",
+		to: entity.Label{
+			Name:  "",
+			Color: "",
+			Desc:  "",
+		},
+	},
+	"enhancement": {
+		color: "a2eeef",
+		desc:  "New feature or request",
+		to: entity.Label{
+			Name:  "",
+			Color: "",
+			Desc:  "",
+		},
+	},
+	"good first issue": {
+		color: "7057ff",
+		desc:  "Good for newcomers",
+		to: entity.Label{
+			Name:  "",
+			Color: "",
+			Desc:  "",
+		},
+	},
+	"help wanted": {
+		color: "008672",
+		desc:  "Extra attention is needed",
+		to: entity.Label{
+			Name:  "invalid",
+			Color: "e4e669",
+			Desc:  "This doesn't seem right",
+		},
+	},
+	"invalid": {
+		color: "e4e669",
+		desc:  "This doesn't seem right",
+		to: entity.Label{
+			Name:  "",
+			Color: "",
+			Desc:  "",
+		},
+	},
+	"question": {
+		color: "d876e3",
+		desc:  "Further information is requested",
+		to: entity.Label{
+			Name:  "",
+			Color: "",
+			Desc:  "",
+		},
+	},
+	"wontfix": {
+		color: "ffffff",
+		desc:  "This will not be worked on",
+		to: entity.Label{
+			Name:  "",
+			Color: "",
+			Desc:  "",
+		},
+	},
 }
