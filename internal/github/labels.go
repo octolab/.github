@@ -8,7 +8,6 @@ import (
 	"github.com/google/go-github/v29/github"
 	"golang.org/x/sync/errgroup"
 
-	"go.octolab.org/toolkit/github/internal"
 	"go.octolab.org/toolkit/github/internal/entity"
 	"go.octolab.org/toolkit/github/internal/errors"
 )
@@ -16,7 +15,7 @@ import (
 func (manager *manager) CompareLabels(
 	ctx context.Context,
 	expected,
-	obtained internal.RepositoryURN,
+	obtained entity.RepositoryURN,
 ) ([]entity.LabelTransform, error) {
 	repositories, err := manager.RepositoryWithLabels(ctx, expected, obtained)
 	if err != nil {
@@ -36,14 +35,14 @@ func (manager *manager) CompareLabels(
 
 func (manager *manager) RepositoryWithLabels(
 	ctx context.Context,
-	list ...internal.RepositoryURN,
-) ([]internal.Repository, error) {
-	result := make([]internal.Repository, 0, len(list))
+	list ...entity.RepositoryURN,
+) ([]entity.Repository, error) {
+	result := make([]entity.Repository, 0, len(list))
 
 	for _, urn := range list {
 		var (
 			mutex      sync.Mutex
-			repository internal.Repository
+			repository entity.Repository
 		)
 
 		owner, repo := urn.Split()
@@ -57,7 +56,7 @@ func (manager *manager) RepositoryWithLabels(
 
 			mutex.Lock()
 			repository.ID = data.GetID()
-			repository.URN = internal.RepositoryURN(data.GetFullName())
+			repository.URN = entity.RepositoryURN(data.GetFullName())
 			mutex.Unlock()
 			return nil
 		})

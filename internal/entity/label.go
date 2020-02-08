@@ -1,12 +1,5 @@
 package entity
 
-const (
-	SkipLabel LabelOperation = 1 << iota
-	CreateLabel
-	DeleteLabel
-	UpdateLabel
-)
-
 // Label represents a GitHub label.
 type Label struct {
 	ID    int64
@@ -15,10 +8,33 @@ type Label struct {
 	Desc  string
 }
 
-type LabelOperation uint
+type LabelOperation byte
+
+const (
+	SkipLabel LabelOperation = 1 << iota
+	CreateLabel
+	DeleteLabel
+	UpdateLabel
+)
+
+func (op LabelOperation) Skip() bool {
+	return op == SkipLabel
+}
+
+func (op LabelOperation) Create() bool {
+	return op == CreateLabel
+}
+
+func (op LabelOperation) Delete() bool {
+	return op == DeleteLabel
+}
+
+func (op LabelOperation) Update() bool {
+	return op == UpdateLabel
+}
 
 type LabelTransform struct {
-	Operation LabelOperation
-	From      Label
-	To        Label
+	LabelOperation
+	From Label
+	To   Label
 }

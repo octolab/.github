@@ -3,9 +3,9 @@ package labels
 import (
 	"context"
 
-	"go.octolab.org/toolkit/github/internal"
+	"go.octolab.org/toolkit/github/internal/entity"
 )
 
 type Provider interface {
-	RepositoryWithLabels(context.Context, ...internal.RepositoryURN) ([]internal.Repository, error)
+	RepositoryWithLabels(context.Context, ...entity.RepositoryURN) ([]entity.Repository, error)
 }
