@@ -5,7 +5,7 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/google/go-github/v29/github"
+	"github.com/google/go-github/v30/github"
 	"golang.org/x/sync/errgroup"
 
 	"go.octolab.org/toolkit/github/internal/entity"
