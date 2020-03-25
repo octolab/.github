@@ -7,6 +7,7 @@ require (
 	github.com/google/go-github/v30 v30.0.0
 	github.com/mattn/go-runewidth v0.0.8 // indirect
 	github.com/spf13/cobra v0.0.6
+	github.com/stretchr/testify v1.5.1
 	go.octolab.org/toolkit/cli v0.0.7
 	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d
 	golang.org/x/sync v0.0.0-20200317015054-43a5402ce75a

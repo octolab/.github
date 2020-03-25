@@ -51,23 +51,14 @@ deps-check:
 deps-clean:
 	@go clean -modcache
 
-.PHONY: deps-module
-deps-module:
-	@go mod download
-	@if [[ "`go env GOFLAGS`" =~ -mod=vendor ]]; then go mod vendor; fi
-
 .PHONY: deps-shake
 deps-shake:
 	@go mod tidy
 
-.PHONY: deps-tools
-deps-tools:
-	@( \
-		cd tools; \
-		go mod download; \
-		if [[ "`go env GOFLAGS`" =~ -mod=vendor ]]; then go mod vendor; fi; \
-		go generate tools.go; \
-	)
+.PHONY: module-deps
+module-deps:
+	@go mod download
+	@if [[ "`go env GOFLAGS`" =~ -mod=vendor ]]; then go mod vendor; fi
 
 .PHONY: update
 update: selector = '{{if not (or .Main .Indirect)}}{{.Path}}{{end}}'
@@ -90,6 +81,10 @@ format:
 go-generate:
 	@go generate $(PACKAGES)
 
+.PHONY: lint
+lint:
+	@golangci-lint run ./...
+
 .PHONY: test
 test:
 	@go test -race -timeout $(TIMEOUT) $(PACKAGES)
@@ -105,10 +100,6 @@ test-with-coverage:
 .PHONY: test-with-coverage-profile
 test-with-coverage-profile:
 	@go test -cover -covermode count -coverprofile c.out -timeout $(TIMEOUT) $(PACKAGES)
-
-.PHONY: lint
-lint:
-	@golangci-lint run ./...
 
 BINARY  = $(BINPATH)/$(shell basename $(MAIN))
 BINPATH = $(PWD)/bin
@@ -155,16 +146,32 @@ dist-check:
 dist-dump:
 	@godownloader .goreleaser.yml > bin/install
 
-# aggregate
+TOOLFLAGS = -mod=
+
+.PHONY: tools-env
+tools-env:
+	@echo "GOBIN:       `go env GOBIN`"
+	@echo "TOOLFLAGS:   $(TOOLFLAGS)"
+
+.PHONY: toolset
+toolset:
+	@( \
+		GOFLAGS=$(TOOLFLAGS); \
+		cd tools; \
+		go mod download; \
+		if [[ "`go env GOFLAGS`" =~ -mod=vendor ]]; then go mod vendor; fi; \
+		go generate tools.go; \
+	)
+
 
 .PHONY: clean
 clean: build-clean deps-clean install-clean test-clean
 
 .PHONY: deps
-deps: deps-module deps-tools
+deps: module-deps toolset
 
 .PHONY: env
-env: go-env build-env
+env: go-env build-env tools-env
 
 .PHONY: generate
 generate: go-generate format
