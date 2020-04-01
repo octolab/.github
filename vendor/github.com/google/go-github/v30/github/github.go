@@ -138,6 +138,9 @@ const (
 
 	// https://developer.github.com/changes/2019-11-05-deprecated-passwords-and-authorizations-api/
 	mediaTypeOAuthAppPreview = "application/vnd.github.doctor-strange-preview+json"
+
+	// https://developer.github.com/changes/2019-12-03-internal-visibility-changes/
+	mediaTypeRepositoryVisibilityPreview = "application/vnd.github.nebula-preview+json"
 )
 
 // A Client manages communication with the GitHub API.
@@ -296,7 +299,7 @@ func NewClient(httpClient *http.Client) *Client {
 // NewEnterpriseClient returns a new GitHub API client with provided
 // base URL and upload URL (often the same URL and is your GitHub Enterprise hostname).
 // If either URL does not have the suffix "/api/v3/", it will be added automatically.
-// If a nil httpClient is provided, http.DefaultClient will be used.
+// If a nil httpClient is provided, a new http.Client will be used.
 //
 // Note that NewEnterpriseClient is a convenience helper only;
 // its behavior is equivalent to using NewClient, followed by setting
