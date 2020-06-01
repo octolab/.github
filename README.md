@@ -2,6 +2,8 @@
 >
 > Default community health files.
 
+[![Template][template.icon]][template.page]
+
 ## 📰 Related articles
 
 - [Creating a default community health file](https://help.github.com/en/github/building-a-strong-community/creating-a-default-community-health-file).
@@ -16,3 +18,6 @@
 ---
 
 made with ❤️ for everyone
+
+[template.page]:    https://github.com/octomation/go-tool
+[template.icon]:    https://img.shields.io/badge/template-go--tool-blue

@@ -4,28 +4,30 @@ github.com/alexeyco/simpletable
 github.com/davecgh/go-spew/spew
 # github.com/golang/protobuf v1.3.2
 github.com/golang/protobuf/proto
-# github.com/google/go-github/v31 v31.0.0
-github.com/google/go-github/v31/github
+# github.com/google/go-github/v32 v32.0.0
+github.com/google/go-github/v32/github
 # github.com/google/go-querystring v1.0.0
 github.com/google/go-querystring/query
 # github.com/inconshreveable/mousetrap v1.0.0
 github.com/inconshreveable/mousetrap
 # github.com/mattn/go-runewidth v0.0.9
 github.com/mattn/go-runewidth
+# github.com/pkg/errors v0.9.1
+github.com/pkg/errors
 # github.com/pmezard/go-difflib v1.0.0
 github.com/pmezard/go-difflib/difflib
-# github.com/spf13/cobra v0.0.7
+# github.com/spf13/cobra v1.0.0
 github.com/spf13/cobra
 # github.com/spf13/pflag v1.0.3
 github.com/spf13/pflag
-# github.com/stretchr/objx v0.1.1
-github.com/stretchr/objx
-# github.com/stretchr/testify v1.5.1
-github.com/stretchr/testify
+# github.com/stretchr/testify v1.6.0
 github.com/stretchr/testify/assert
-github.com/stretchr/testify/http
-github.com/stretchr/testify/mock
-# go.octolab.org/toolkit/cli v0.0.8
+github.com/stretchr/testify/require
+# go.octolab.org v0.0.26
+go.octolab.org/errors
+go.octolab.org/safe
+go.octolab.org/unsafe
+# go.octolab.org/toolkit/cli v0.0.9
 go.octolab.org/toolkit/cli/cobra
 go.octolab.org/toolkit/cli/internal/os/shell
 # golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2
@@ -52,5 +54,5 @@ google.golang.org/appengine/internal/log
 google.golang.org/appengine/internal/remote_api
 google.golang.org/appengine/internal/urlfetch
 google.golang.org/appengine/urlfetch
-# gopkg.in/yaml.v2 v2.2.2
-gopkg.in/yaml.v2
+# gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c
+gopkg.in/yaml.v3

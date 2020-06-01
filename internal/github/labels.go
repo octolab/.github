@@ -5,7 +5,7 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/google/go-github/v31/github"
+	"github.com/google/go-github/v32/github"
 	"golang.org/x/sync/errgroup"
 
 	"go.octolab.org/toolkit/github/internal/entity"
@@ -99,7 +99,7 @@ func (manager *manager) RepositoryWithLabels(
 	return result, nil
 }
 
-var conversion = map[string]struct {
+var _ = map[string]struct {
 	color string
 	desc  string
 	to    entity.Label
