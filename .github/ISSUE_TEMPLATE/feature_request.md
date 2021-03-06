@@ -1,7 +1,9 @@
 ---
 name: Feature request
 about: Suggest an idea for the project.
-labels: type:feature, status:pending
+title:
+labels: help wanted
+assignees: kamilsk
 ---
 
 **Is your feature request related to a problem? Please describe.**

@@ -1,7 +1,9 @@
 ---
 name: Bug report
 about: Create a report to help us improve.
-labels: type:bug, status:pending, help wanted
+title:
+labels: help wanted
+assignees: kamilsk
 ---
 
 **Describe the bug**
