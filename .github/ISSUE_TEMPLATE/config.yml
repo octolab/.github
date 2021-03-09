@@ -1,5 +1,10 @@
 blank_issues_enabled: false
 contact_links:
-  - name: OctoLab Community Support
-    url: https://octolab.slack.com/
-    about: Please ask and answer questions here.
+  - name: Documentation
+    url: https://docs.octolab.org/
+    about: Please take a look at our documentation.
+  - name: Questions
+    url: /discussions
+    about: |
+      If you have a question or are looking for advice,
+      please post on our discussions forum!

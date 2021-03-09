@@ -1,5 +1,5 @@
 ---
-name: Custom issue template
+name: Improvement proposal
 about: Suggest an improvement for the project.
 title:
 labels: help wanted
