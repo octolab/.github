@@ -1,11 +1,3 @@
----
-name: Issue solution
-about: Create a pull request related to an issue.
-title:
-labels: help wanted
-assignees: kamilsk
----
-
 **Describe the issue**
 
 Please add a reference to a related issue in the project.
