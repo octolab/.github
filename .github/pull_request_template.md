@@ -1,12 +1,12 @@
 ---
-name: Bug fix
-about: Create a pull request related to a bug.
+name: Issue solution
+about: Create a pull request related to an issue.
 title:
 labels: help wanted
 assignees: kamilsk
 ---
 
-**Describe the bug**
+**Describe the issue**
 
 Please add a reference to a related issue in the project.
 

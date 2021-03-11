@@ -4,7 +4,7 @@ contact_links:
     url: https://docs.octolab.org/
     about: Please take a look at our documentation.
   - name: Questions
-    url: https://docs.octolab.org/discussions/
+    url: https://docs.octolab.org/faq/
     about: |
       If you have a question or are looking for advice,
       please post on our discussions forum!
