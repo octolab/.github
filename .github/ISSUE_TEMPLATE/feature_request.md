@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea for the project.
+about: Standard feature request template.
 title:
 labels: help wanted
 assignees: kamilsk

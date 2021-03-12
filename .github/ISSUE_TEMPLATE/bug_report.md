@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Create a report to help us improve.
+about: Standard bug report template.
 title:
 labels: help wanted
 assignees: kamilsk

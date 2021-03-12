@@ -1,6 +1,6 @@
 ---
 name: Improvement proposal
-about: Suggest an improvement for the project.
+about: Standard improvement proposal template.
 title:
 labels: help wanted
 assignees: kamilsk
