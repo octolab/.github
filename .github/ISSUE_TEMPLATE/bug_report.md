@@ -2,7 +2,7 @@
 name: Bug report
 about: Standard bug report template.
 title:
-labels: help wanted
+labels: "kind: bug", help wanted
 assignees: kamilsk
 ---
 
@@ -20,8 +20,8 @@ A clear and concise description of what you expected to happen.
 
 **Environment (please complete the following information):**
 
-- Module version:
-- Go version:
+- OS:
+- Runtime:
 
 **Additional context**
 
