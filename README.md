@@ -77,6 +77,6 @@
   - [Tidelift](https://tidelift.com/).
 - Inspiration
   - [Awesome GitHub Issues & PRs Templates](https://github.com/devspace/awesome-github-templates).
-  - [A collection of GitHub issue and pull request templates](https://github.com/stevemao/github-issue-templates).
+  - [GitHub Issue and Pull Request Templates Generator](https://www.talater.com/open-source-templates/).
 
 <p align="right">made with ❤️ for everyone</p>

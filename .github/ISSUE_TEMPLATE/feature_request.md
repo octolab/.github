@@ -2,7 +2,7 @@
 name: Feature request
 about: Standard feature request template.
 title:
-labels: "kind: feature", help wanted
+labels: ["kind: feature", help wanted]
 assignees: kamilsk
 ---
 

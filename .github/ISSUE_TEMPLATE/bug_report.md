@@ -2,7 +2,7 @@
 name: Bug report
 about: Standard bug report template.
 title:
-labels: "kind: bug", help wanted
+labels: ["kind: bug", help wanted]
 assignees: kamilsk
 ---
 
