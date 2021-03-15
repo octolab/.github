@@ -2,7 +2,7 @@
 name: Improvement proposal
 about: Standard improvement proposal template.
 title:
-labels: ["kind: improvement", help wanted]
+labels: "kind: improvement, help wanted"
 assignees: kamilsk
 ---
 
