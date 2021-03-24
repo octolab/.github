@@ -2,18 +2,7 @@
 >
 > OctoLab community health files.
 
-## 🎛 Configuration
-
-- `https://github.com/organizations/{{.Org}}/settings/repository-defaults` <br>
-  Contains repository default branch and labels for organization.
-
-- `https://github.com/{{.Owner}}/{{.Repo}}/community` <br>
-  Contains community profile checklist for a repository.
-
-- `https://github.com/{{.Owner}}/{{.Repo}}/security` <br>
-  Contains security overview for a repository.
-
-## 📰 Related articles
+## 📰 Articles
 
 - [Building a strong community](https://docs.github.com/en/github/building-a-strong-community).
   - [Adding a code of conduct to your project](https://docs.github.com/en/github/building-a-strong-community/adding-a-code-of-conduct-to-your-project).
@@ -43,6 +32,18 @@
     - [Hugs Platform](https://hugs.octolab.net/).
     - [OctoLab Documentation](https://docs.octolab.org/).
     - [OctoLab Go](https://go.octolab.org/).
+- [About code owners](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners).
+
+## 🎛 Configuration
+
+- `https://github.com/organizations/{{.Org}}/settings/repository-defaults` <br>
+  Contains repository default branch and labels for organization.
+
+- `https://github.com/{{.Owner}}/{{.Repo}}/community` <br>
+  Contains community profile checklist for a repository.
+
+- `https://github.com/{{.Owner}}/{{.Repo}}/security` <br>
+  Contains security overview for a repository.
 
 ## 🎁 Resources
 
