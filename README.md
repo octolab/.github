@@ -34,17 +34,6 @@
     - [OctoLab Go](https://go.octolab.org/).
 - [About code owners](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners).
 
-## 🎛 Configuration
-
-- `https://github.com/organizations/{{.Org}}/settings/repository-defaults` <br>
-  Contains repository default branch and labels for organization.
-
-- `https://github.com/{{.Owner}}/{{.Repo}}/community` <br>
-  Contains community profile checklist for a repository.
-
-- `https://github.com/{{.Owner}}/{{.Repo}}/security` <br>
-  Contains security overview for a repository.
-
 ## 🎁 Resources
 
 - Domain
