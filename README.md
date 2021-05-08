@@ -1,4 +1,4 @@
-> # 🌱 Our Community at GitHub
+> # 🌱 Community Policy at GitHub
 >
 > OctoLab community health files.
 
