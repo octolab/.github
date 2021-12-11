@@ -1,4 +1,3 @@
 # Hi there! 👋
 
-<img align="right" width="350"
-     src="https://raw.githubusercontent.com/octolab/.github/main/assets/geek/octolab.png" />
+<img align="right" width="350" src="https://cdn.octolab.org/geek/octolab.png" />

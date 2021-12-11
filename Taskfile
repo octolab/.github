@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+dist() {
+  local forks fork branch
+  forks=$(git remote | grep fork- | awk '{print $1}' | sort | uniq)
+  for fork in ${forks}; do
+    branch=${fork/fork-/}
+    git checkout "${branch}"
+    git rebase main
+    git push --force-with-lease "${fork}" main
+  done
+  git checkout main
+}
+
+"${@}"
